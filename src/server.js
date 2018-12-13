@@ -1,14 +1,17 @@
 import Hapi from "hapi";
+import knex from "./config/knew";
 
-import { root } from "./routes";
+
+import { root, tasks, users } from "./routes";
 
 const server = new Hapi.Server({
   port: process.env.PORT || 8000
 });
 
 const init = async () => {
-  server.route([].concat(root));
+  server.route([root, tasks, users]);
 
+  // server.start();
   await server.start();
   console.log("Server is running");
 };
